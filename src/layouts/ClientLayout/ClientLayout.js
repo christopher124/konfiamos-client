@@ -1,4 +1,4 @@
-export function ClientLayout({ props }) {
+export function ClientLayout(props) {
   const { children } = props;
   return (
     <div>
