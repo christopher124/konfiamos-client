@@ -1,9 +1,25 @@
+import { TopBar } from "../../components/web/TopBar";
+import "./ClientLayout.scss";
+
 export function ClientLayout(props) {
   const { children } = props;
   return (
     <div>
-      <h2>Se esta utilizando el ClientLayout</h2>
+      {/* Navigation */}
+
+      <div>
+        <TopBar />
+      </div>
+      {/* Navigation - final */}
+
+      {/* Contenido */}
+
       {children}
+
+      {/* Contenido - final */}
+
+      {/* Footer */}
+      <div></div>
     </div>
   );
 }
