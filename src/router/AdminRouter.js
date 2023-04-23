@@ -1,10 +1,12 @@
 import { Routes, Route } from "react-router-dom"; // rutas
 import { AdminLayout } from "../layouts"; // Layout del admin
 import { Auth } from "../pages/admin";
-
-const user = null;
+import { useAuth } from "../hooks";
 
 export function AdminRouter() {
+  const { user } = useAuth();
+  console.log(useAuth());
+
   // funcion para cargar layout de admin
   const loadLayout = (Layout, Page) => {
     return (
