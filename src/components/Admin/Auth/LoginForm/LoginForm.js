@@ -1,6 +1,7 @@
 import { Form } from "semantic-ui-react";
 import { useFormik } from "formik";
 import { Auth } from "../../../../api";
+import { toast } from "react-toastify";
 import { useAuth } from "../../../../hooks";
 import { initialValues, validationSchema } from "./LoginForm.from";
 
@@ -15,9 +16,12 @@ export function LoginForm() {
     onSubmit: async (formValue) => {
       try {
         const response = await authController.login(formValue);
+        authController.setAccessToken(response.access);
+        authController.setRefreshToken(response.refresh);
         login(response.access);
+        toast.success("Bienvenido," + " " + response.user.username);
       } catch (error) {
-        console.log(error);
+        toast.error(error.msg);
       }
     },
   });
