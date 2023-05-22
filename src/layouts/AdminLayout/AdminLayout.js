@@ -1,9 +1,20 @@
+import React from "react";
+import "./AdminLayout.scss";
+
 export function AdminLayout(props) {
   const { children } = props; // hijo de un componente
   return (
-    <div>
-      <h2>Se esta utilizando el AdminLayout</h2>
-      {children}
+    <div className="admin-layout">
+      <div className="admin-layout__left">
+        <div className="logo">LOGO</div>
+        <span>ADMIN Menu</span>
+      </div>
+      <div className="admin-layout__right">
+        <div className="admin-layout__right-header">
+          <span>LOGOUT</span>
+        </div>
+        <div className="admin-layout__right-content">{children}</div>
+      </div>
     </div>
   );
 }
