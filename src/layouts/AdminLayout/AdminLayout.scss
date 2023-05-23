@@ -1,8 +1,8 @@
 @import "~/src/scss/index.scss";
 
 $widthLeftMenu: 200px;
-
-
+$transitionDuration: 0.5s;
+$transitionTiming: ease;
 
 .admin-layout {
   display: flex;
@@ -13,32 +13,56 @@ $widthLeftMenu: 200px;
   &__left {
     background-color: $background-dark;
     width: $widthLeftMenu;
-     @media screen and (max-width: 767px) {
-      width: 100%;
+    transition: transform $transitionDuration $transitionTiming;
+    transform: translateX(0);
+
+    &.hidden {
+      transform: translateX(-$widthLeftMenu);
     }
 
     .logo {
-      height: 30px;
+      height: 140px;
       width: 100%;
       margin: 10px 0;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity $transitionDuration $transitionTiming;
+    }
+
+    &.hidden .logo {
+      opacity: 0;
+      visibility: hidden;
     }
   }
 
   &__right {
-    width: calc(100% - $widthLeftMenu);
+    flex: 1;
 
     &-header {
       background-color: $background-dark;
       height: 50px;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       padding: 0 10px;
     }
 
     &-content {
       position: relative;
       margin: 20px;
+    }
+  }
+
+  .toggle-left-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: transform $transitionDuration $transitionTiming;
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }
