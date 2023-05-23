@@ -1,8 +1,8 @@
 @import "~/src/scss/index.scss";
 
 $widthLeftMenu: 200px;
-$transitionDuration: 0.5s;
-$transitionTiming: ease;
+$transitionDuration: 0.3s;
+$transitionTiming: cubic-bezier(0.68, -0.55, 0.27, 1.55); // Efecto de transición personalizado
 
 .admin-layout {
   display: flex;
@@ -24,14 +24,13 @@ $transitionTiming: ease;
       height: 140px;
       width: 100%;
       margin: 10px 0;
-      visibility: visible;
       opacity: 1;
       transition: opacity $transitionDuration $transitionTiming;
-    }
 
-    &.hidden .logo {
-      opacity: 0;
-      visibility: hidden;
+      &.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
   }
 
@@ -40,7 +39,7 @@ $transitionTiming: ease;
 
     &-header {
       background-color: $background-dark;
-      height: 50px;
+      height: 75px;
       display: flex;
       align-items: center;
       justify-content: space-between;

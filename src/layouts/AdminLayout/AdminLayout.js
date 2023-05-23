@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Icon } from "../../assets";
-import { AdminMenu } from "../../components/Admin/AdminLayout";
+import { AdminMenu, Logout } from "../../components/Admin/AdminLayout";
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
 import "./AdminLayout.scss";
 
@@ -13,9 +13,9 @@ export function AdminLayout(props) {
   };
 
   return (
-    <div className={`admin-layout ${isLeftVisible ? "" : "left-hidden"}`}>
+    <div className="admin-layout">
       <div className={`admin-layout__left ${isLeftVisible ? "" : "hidden"}`}>
-        <Icon.LogoWhite className="logo" />
+        <Icon.LogoWhite className={`logo ${isLeftVisible ? "" : "hidden"}`} />
         <AdminMenu />
       </div>
       <div className="admin-layout__right">
@@ -23,7 +23,7 @@ export function AdminLayout(props) {
           <button className="toggle-left-button" onClick={toggleLeftVisibility}>
             {isLeftVisible ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}
           </button>
-          <span>LOGOUT</span>
+          <Logout />
         </div>
         <div className="admin-layout__right-content">{children}</div>
       </div>

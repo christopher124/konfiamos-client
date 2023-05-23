@@ -69,6 +69,10 @@ export function AdminRouter() {
           {isUser && (
             <>
               <Route
+                path="/admin"
+                element={loadLayout(AdminLayout, Dashboard)}
+              />
+              <Route
                 path="/admin/menu"
                 element={loadLayout(AdminLayout, Menu)}
               />
