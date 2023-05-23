@@ -1,12 +1,22 @@
-import { Routes, Route } from "react-router-dom"; // rutas
-import { AdminLayout } from "../layouts"; // Layout del admin
-import { Auth, Customer, Dashboard, Users } from "../pages/admin";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { AdminLayout } from "../layouts";
+import {
+  Auth,
+  Customer,
+  Dashboard,
+  Users,
+  Menu,
+  LoanRequest,
+} from "../pages/admin";
 import { useAuth } from "../hooks";
 
 export function AdminRouter() {
   const { user } = useAuth();
 
-  // funcion para cargar layout de admin
+  const isAdmin = user && user.role && user.role.name === "Admin";
+  const isUser = user && user.role && user.role.name === "User";
+
+  // Función para cargar el layout de admin
   const loadLayout = (Layout, Page) => {
     return (
       <Layout>
@@ -14,34 +24,83 @@ export function AdminRouter() {
       </Layout>
     );
   };
+
+  // Redirección para rutas no autorizadas
+  const redirectToUnauthorized = () => <Navigate to="/admin/unauthorized" />;
+
+  let validPath = true;
+
   return (
     <Routes>
       {!user ? (
         <Route path="/admin/*" element={<Auth />} />
       ) : (
         <>
-          {/* Una pagina dos path */}
-          {["/admin", "/admin/dashboard"].map((path) => (
-            <Route
-              key={path}
-              path={path}
-              element={loadLayout(AdminLayout, Dashboard)}
-            />
-          ))}
+          {isAdmin && (
+            <>
+              <Route
+                path="/admin/dashboard"
+                element={loadLayout(AdminLayout, Dashboard)}
+              />
+              Una pagina dos path
+              {["/admin", "/admin/dashboard"].map((path) => (
+                <Route
+                  key={path}
+                  path={path}
+                  element={loadLayout(AdminLayout, Dashboard)}
+                />
+              ))}
+              <Route
+                path="/admin/users"
+                element={loadLayout(AdminLayout, Users)}
+              />
+              <Route
+                path="/admin/customers"
+                element={loadLayout(AdminLayout, Customer)}
+              />
+              <Route
+                path="/admin/loanrequest"
+                element={loadLayout(AdminLayout, LoanRequest)}
+              />
+              {/* Agregar rutas adicionales para el rol "Admin" */}
+            </>
+          )}
 
-          <Route path="/admin/users" element={loadLayout(AdminLayout, Users)} />
+          {isUser && (
+            <>
+              <Route
+                path="/admin/menu"
+                element={loadLayout(AdminLayout, Menu)}
+              />
+              {/* Agregar rutas adicionales para el rol "Usuario" */}
+            </>
+          )}
 
+          <Route path="/admin/menu" element={loadLayout(AdminLayout, Menu)} />
+          <Route path="/admin/unauthorized" element={<UnauthorizedPage />} />
+          {/* Agregar más rutas públicas o de error aquí */}
           <Route
-            path="/admin/customers"
-            element={loadLayout(AdminLayout, Customer)}
+            path="*"
+            element={
+              validPath ? (
+                redirectToUnauthorized()
+              ) : (
+                <Navigate to="/admin/unauthorized" replace />
+              )
+            }
           />
-          {/* <Route path="/admin/menu" element={loadLayout(AdminLayout, Menu)} />
-        <Route
-          path="/admin/newsletter"
-          element={loadLayout(AdminLayout, Newsletter)}
-        /> */}
         </>
       )}
     </Routes>
+  );
+}
+
+function UnauthorizedPage() {
+  return (
+    <div>
+      <h1>Acceso no autorizado</h1>
+      <p>No tienes permiso para acceder a esta página.</p>
+      <Link to="/admin/menu">Volver al Dashboard</Link>
+    </div>
   );
 }
