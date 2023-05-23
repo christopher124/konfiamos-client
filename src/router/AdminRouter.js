@@ -9,6 +9,7 @@ import {
   LoanRequest,
 } from "../pages/admin";
 import { useAuth } from "../hooks";
+// import { UserForm } from "../components/Users/UserForm";
 
 export function AdminRouter() {
   const { user } = useAuth();
@@ -54,6 +55,10 @@ export function AdminRouter() {
                 path="/admin/users"
                 element={loadLayout(AdminLayout, Users)}
               />
+              {/* <Route
+                path="/admin/nuevo/user"
+                element={loadLayout(AdminLayout, UserForm)}
+              /> */}
               <Route
                 path="/admin/customers"
                 element={loadLayout(AdminLayout, Customer)}
