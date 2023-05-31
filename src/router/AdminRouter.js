@@ -7,6 +7,7 @@ import {
   Users,
   Menu,
   LoanRequest,
+  Role,
 } from "../pages/admin";
 import { useAuth } from "../hooks";
 // import { UserForm } from "../components/Users/UserForm";
@@ -66,6 +67,10 @@ export function AdminRouter() {
               <Route
                 path="/admin/loanrequest"
                 element={loadLayout(AdminLayout, LoanRequest)}
+              />
+              <Route
+                path="/admin/roles"
+                element={loadLayout(AdminLayout, Role)}
               />
               {/* Agregar rutas adicionales para el rol "Admin" */}
             </>
