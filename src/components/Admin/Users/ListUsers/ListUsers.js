@@ -11,7 +11,6 @@ export function ListUsers(props) {
   const { usersActive, reload } = props;
   const [users, setUsers] = useState(null);
   const { accessToken } = useAuth();
-  console.log(users);
   useEffect(() => {
     (async () => {
       try {
@@ -21,10 +20,7 @@ export function ListUsers(props) {
           usersActive
         );
         setUsers(response);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     })();
   }, [usersActive, reload]);
 
@@ -32,31 +28,15 @@ export function ListUsers(props) {
   if (size(users) === 0) return "No hay ningun usuario";
 
   return (
-    <div className="relative overflow-x-auto shadow-2xl sm:rounded-lg">
-      <table
-        id="tableDoctors"
-        className=" border border-slate-50 w-full  text-base text-center text-white"
-      >
-        <thead className="border-b text-base uppercase bg-[#687584] text-white">
+    <div className="overflow-x-auto shadow-2xl">
+      <table id="tableDoctors" className="w-full text-base text-white">
+        <thead className="bg-[#687584]">
           <tr className="border border-slate-50">
-            <th scope="col" className=" text-white py-3 px-6 text-center ">
-              Avatar
-            </th>
-            <th scope="col" className=" text-white py-3 px-6 text-center ">
-              Nombres completo
-            </th>
-            <th scope="col" className="text-white py-3 px-6 text-center">
-              Correo
-            </th>
-            <th scope="col" className="text-white py-3 px-6 text-center">
-              Rol
-            </th>
-            <th
-              scope="col"
-              className="text-white font-bold py-3 px-6 text-center "
-            >
-              Acciones
-            </th>
+            <th className="py-3 px-6 text-center">Avatar</th>
+            <th className="py-3 px-6 text-center">Nombres completo</th>
+            <th className="py-3 px-6 text-center">Correo</th>
+            <th className="py-3 px-6 text-center">Rol</th>
+            <th className="py-3 px-6 text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>

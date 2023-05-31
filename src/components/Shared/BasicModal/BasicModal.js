@@ -10,5 +10,5 @@ export function BasicModal(props) {
   );
 }
 BasicModal.defaultProps = {
-  size: "small",
+  size: "fullscreen",
 };

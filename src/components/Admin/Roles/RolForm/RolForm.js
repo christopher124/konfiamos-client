@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { Form } from "semantic-ui-react";
 import { useFormik } from "formik";
-import { Role } from "../../../api";
+import { Role } from "../../../../api";
 import { initialValues, validationSchema } from "./RolForm.form";
-import { useAuth } from "../../../hooks";
+import { useAuth } from "../../../../hooks";
 import { toast } from "react-toastify";
 
 const RoleController = new Role();

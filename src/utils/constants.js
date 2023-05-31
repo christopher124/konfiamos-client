@@ -12,6 +12,8 @@ export const ENV = {
     ROLES: "roles",
     USER: "user",
     USERS: "users",
+    CUSTOMER: "customer",
+    CUSTOMERS: "customers",
   },
   JWT: {
     ACCESS: "access",

@@ -32,6 +32,10 @@ $transitionTiming: cubic-bezier(0.68, -0.55, 0.27, 1.55); // Efecto de transici√
         visibility: hidden;
       }
     }
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   &__right {
@@ -49,6 +53,10 @@ $transitionTiming: cubic-bezier(0.68, -0.55, 0.27, 1.55); // Efecto de transici√
     &-content {
       position: relative;
       margin: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
     }
   }
 

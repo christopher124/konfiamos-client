@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tab, Button } from "semantic-ui-react";
 import { BasicModal } from "../../../components/Shared";
-import { ListRoles, RolForm } from "../../../components/Roles";
+import { ListRoles, RolForm } from "../../../components/Admin/Roles";
 import "./Role.scss";
 
 export function Role() {

@@ -1,24 +1,21 @@
 import { useState, useEffect } from "react";
 import { Loader } from "semantic-ui-react";
 import { size, map } from "lodash";
-import { Role } from "../../../api";
-import { useAuth } from "../../../hooks";
+import { Role } from "../../../../api";
+import { useAuth } from "../../../../hooks";
 import { RoleItem } from "../RoleItem";
 
 const RoleController = new Role();
 
 export function ListRoles(props) {
-  console.log(props);
   const [roles, setRoles] = useState(null);
   const { accessToken } = useAuth();
-  console.log(roles);
 
   useEffect(() => {
     const fetchRoles = async () => {
       try {
         const roles = await RoleController.getRoles(accessToken);
         setRoles(roles);
-        console.log(roles);
       } catch (error) {}
     };
 
@@ -26,31 +23,17 @@ export function ListRoles(props) {
   }, []);
 
   if (!roles) return <Loader active inline="centered" />;
-  if (size(roles) === 0) return "No hay ningun usuario";
+  if (size(roles) === 0) return "No hay ningún rol";
 
   return (
     <div className="relative overflow-x-auto shadow-2xl sm:rounded-lg">
-      <table
-        id="tableDoctors"
-        className=" border border-slate-50 w-full  text-base text-center text-white"
-      >
+      <table className="w-full border border-slate-50 text-base text-center text-white">
         <thead className="border-b text-base uppercase bg-[#687584] text-white">
           <tr className="border border-slate-50">
-            <th scope="col" className=" text-white py-3 px-6 text-center ">
-              Nombre del rol
-            </th>
-            <th scope="col" className="text-white py-3 px-6 text-center">
-              Nombre a mostrar
-            </th>
-            <th scope="col" className="text-white py-3 px-6 text-center">
-              Descripcion
-            </th>
-            <th
-              scope="col"
-              className="text-white font-bold py-3 px-6 text-center "
-            >
-              Acciones
-            </th>
+            <th className="py-3 px-6 text-center sm:w-1/4">Nombre del rol</th>
+            <th className="py-3 px-6 text-center sm:w-1/4">Nombre a mostrar</th>
+            <th className="py-3 px-6 text-center sm:w-1/4">Descripción</th>
+            <th className="py-3 px-6 text-center sm:w-1/4">Acciones</th>
           </tr>
         </thead>
         <tbody>
