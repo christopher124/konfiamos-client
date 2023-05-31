@@ -37,10 +37,18 @@ export function AdminMenu() {
           </Menu.Item>
           <Menu.Item
             as={Link}
+            to="/admin/roles"
+            active={isCurrentPath("/admin/roles")}
+          >
+            <Icon name="address card" />
+            Roles
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
             to="/admin/customers"
             active={isCurrentPath("/admin/customers")}
           >
-            <Icon name="users" />
+            <Icon name="address book" />
             Clientes
           </Menu.Item>
           <Menu.Item
