@@ -7,9 +7,7 @@ import { initialValues, validationSchema } from "./UserForm.form";
 import "./UserForm.scss";
 import { Role, User } from "../../../../api";
 import { useAuth } from "../../../../hooks";
-
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const RoleController = new Role();
 const UserController = new User();
@@ -26,6 +24,7 @@ export function UserForm(props) {
       try {
         await UserController.createUser(accessToken, formValue);
         toast.success("Usuario creado correctamente.");
+        onReload();
         close();
       } catch (error) {
         toast.error(error.msg);
@@ -78,6 +77,7 @@ export function UserForm(props) {
       <Form.Group widths={"equal"}>
         <Form.Input
           name="firstname"
+          label="Nombres"
           placeholder="Nombres"
           onChange={formik.handleChange}
           value={formik.values.firstname}
@@ -85,6 +85,7 @@ export function UserForm(props) {
         />
         <Form.Input
           name="lastname"
+          label="Apellidos"
           placeholder="Apellidos"
           onChange={formik.handleChange}
           value={formik.values.lastname}
@@ -94,12 +95,14 @@ export function UserForm(props) {
       <Form.Group widths={"equal"}>
         <Form.Input
           name="email"
+          label="Correo"
           placeholder="Correo electrónico"
           onChange={formik.handleChange}
           value={formik.values.email}
           error={formik.errors.email}
         />
         <Form.Dropdown
+          label="Rol"
           placeholder="Selecciona un rol"
           selection
           options={roleOptions.map((role) => ({
@@ -115,6 +118,7 @@ export function UserForm(props) {
       <Form.Input
         type="password"
         name="password"
+        label="Contraseña"
         placeholder="Contraseña"
         onChange={formik.handleChange}
         value={formik.values.password}
