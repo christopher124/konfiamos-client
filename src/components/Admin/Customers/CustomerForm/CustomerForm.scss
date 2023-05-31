@@ -1,0 +1,47 @@
+@import "~/src/scss/index.scss";
+
+.dropzone-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px; /* Agrega un margen inferior para separar los dropzones del botón */
+  cursor: pointer;
+
+}
+
+
+.dropzone-container {
+  flex: 1;
+  margin-right: 10px; /* Ajusta el margen derecho según tus necesidades */
+  border: 2px dashed #ccc; /* Agrega un borde discontinuo para resaltar el área de carga */
+  padding: 10px; /* Ajusta el padding según tus necesidades */
+  cursor: pointer;
+
+}
+
+.form-divider {
+  border-bottom: 1px solid black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+.dropzone-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.dropzone-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.file-name {
+  margin-top: 5px;
+}
+
