@@ -1,10 +1,9 @@
 import { Button, Icon } from "semantic-ui-react";
-import { ENV } from "../../../../utils";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export function CustomerItem(props) {
   const { customer } = props;
-
+  const navigate = useNavigate();
   //   const handleDownloadAccountStatus = () => {
   //     if (customer.accountStatus) {
   //       const url = `${ENV.BASE_PATH}/${customer.accountStatus}`;
@@ -69,7 +68,11 @@ export function CustomerItem(props) {
           <Icon name="download" />
         </Button> */}
 
-        <Button icon primary>
+        <Button
+          icon
+          primary
+          onClick={() => navigate(`/admin/customer/${customer._id}`)}
+        >
           <Icon name="eye" />
         </Button>
         <Button icon primary>
