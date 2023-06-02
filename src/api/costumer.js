@@ -57,4 +57,23 @@ export class Customer {
       throw error;
     }
   }
+  async getCustomer(accessToken, id) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.CUSTOMER}/${id}`;
+      const params = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
