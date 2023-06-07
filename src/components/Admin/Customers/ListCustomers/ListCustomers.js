@@ -8,7 +8,7 @@ import { CustomerItem } from "../CustomerItem";
 const CustomerController = new Customer();
 
 export function ListCustomers(props) {
-  const { customerStatus, reload } = props;
+  const { customerStatus, reload, onReload } = props;
   const [customers, setCustomers] = useState(null);
   const { accessToken } = useAuth();
 
@@ -45,7 +45,11 @@ export function ListCustomers(props) {
         </thead>
         <tbody>
           {map(customers, (customer) => (
-            <CustomerItem key={customer._id} customer={customer} />
+            <CustomerItem
+              key={customer._id}
+              customer={customer}
+              onReload={onReload}
+            />
           ))}
         </tbody>
       </table>
