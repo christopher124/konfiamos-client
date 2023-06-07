@@ -12,13 +12,19 @@ export function RolForm(props) {
   const { close, onReload, role } = props;
   const { accessToken } = useAuth();
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(role),
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        await RoleController.createRole(accessToken, formValue);
-        toast.success("Rol creado correctamente.");
+        if (!role) {
+          await RoleController.createRole(accessToken, formValue);
+          toast.success("Rol creado correctamente.");
+        } else {
+          await RoleController.updateRole(accessToken, role._id, formValue);
+          toast.success("Rol actilizado correctamente.");
+        }
+        onReload();
         close();
       } catch (error) {
         toast.error(error.msg);

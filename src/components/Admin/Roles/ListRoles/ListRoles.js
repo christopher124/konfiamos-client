@@ -8,6 +8,7 @@ import { RoleItem } from "../RoleItem";
 const RoleController = new Role();
 
 export function ListRoles(props) {
+  const { reload, onReload } = props;
   const [roles, setRoles] = useState(null);
   const { accessToken } = useAuth();
 
@@ -20,7 +21,7 @@ export function ListRoles(props) {
     };
 
     fetchRoles();
-  }, []);
+  }, [reload]);
 
   if (!roles) return <Loader active inline="centered" />;
   if (size(roles) === 0) return "No hay ningún rol";
@@ -38,7 +39,7 @@ export function ListRoles(props) {
         </thead>
         <tbody>
           {roles?.map((role) => (
-            <RoleItem key={role._id} role={role} />
+            <RoleItem key={role._id} role={role} onReload={onReload} />
           ))}
         </tbody>
       </table>

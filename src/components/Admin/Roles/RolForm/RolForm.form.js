@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 
-export function initialValues() {
+export function initialValues(role) {
   return {
-    name: "",
-    displayName: "",
-    description: "",
+    name: role?.name || "",
+    displayName: role?.displayName || "",
+    description: role?.description || "",
   };
 }
 

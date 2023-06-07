@@ -9,12 +9,13 @@ export function Role() {
   const [reload, setReload] = useState();
 
   const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
+  const onReload = () => setReload((prevState) => !prevState);
 
   const panes = [
     {
       render: () => (
-        <Tab.Pane te attached={false}>
-          <ListRoles />
+        <Tab.Pane attached={false}>
+          <ListRoles reload={reload} onReload={onReload} />
         </Tab.Pane>
       ),
     },
@@ -34,7 +35,7 @@ export function Role() {
         <Tab menu={{ secondary: true }} panes={panes} />
       </div>
       <BasicModal show={showModal} close={onOpenCloseModal} title="Nuevo Rol">
-        <RolForm close={onOpenCloseModal} />
+        <RolForm close={onOpenCloseModal} onReload={onReload} />
       </BasicModal>
     </>
   );

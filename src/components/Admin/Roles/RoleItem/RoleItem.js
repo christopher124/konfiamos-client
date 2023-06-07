@@ -1,7 +1,17 @@
-import { Button, Icon, Confirm } from "semantic-ui-react";
+import { useState } from "react";
+import { Button, Icon } from "semantic-ui-react";
+import { BasicModal } from "../../../Shared";
+import { RolForm } from "../RolForm";
+
 export function RoleItem(props) {
-  const { role } = props;
-  console.log(role);
+  const { role, onReload } = props;
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
+  const openUpdateRole = () => {
+    setTitleModal(`Actulizar ${role.name}`);
+    onOpenCloseModal();
+  };
   return (
     <>
       <tr className="border-b bg-cyan-800 border-white">
@@ -22,7 +32,7 @@ export function RoleItem(props) {
 
         <td className=" border border-slate-50 py-3 px-6 text-center">
           <div className="flex item-center justify-center">
-            <Button icon primary>
+            <Button icon primary onClick={openUpdateRole}>
               <Icon name="pencil" />
             </Button>
 
@@ -32,6 +42,9 @@ export function RoleItem(props) {
           </div>
         </td>
       </tr>
+      <BasicModal show={showModal} close={onOpenCloseModal} title={titleModal}>
+        <RolForm close={onOpenCloseModal} onReload={onReload} role={role} />
+      </BasicModal>
     </>
   );
 }
