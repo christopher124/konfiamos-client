@@ -42,4 +42,26 @@ export class Role {
   catch(error) {
     throw error;
   }
+
+  async updateRole(accessToken, idrole, roleData) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}/${idrole}`;
+      const params = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(roleData),
+      };
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
