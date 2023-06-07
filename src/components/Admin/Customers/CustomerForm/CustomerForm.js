@@ -6,6 +6,7 @@ import { initialValues, validationSchema } from "./CustomerForm.form";
 import { Customer } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { toast } from "react-toastify";
+import { ENV } from "../../../../utils";
 import "./CustomerForm.scss";
 
 const CustomerController = new Customer();
@@ -14,14 +15,22 @@ export function CustomerForm(props) {
   const { close, onReload, customer } = props;
   const { accessToken } = useAuth();
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(customer),
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        await CustomerController.createCustomer(accessToken, formValue);
-        toast.success("Usuario creado correctamente.");
-        console.log(formValue);
+        if (!customer) {
+          await CustomerController.createCustomer(accessToken, formValue);
+          toast.success("Cliente creado correctamente.");
+        } else {
+          await CustomerController.updateCustomer(
+            accessToken,
+            customer._id,
+            formValue
+          );
+          toast.success("Cliente actualizado correctamente.");
+        }
         onReload();
         close();
       } catch (error) {

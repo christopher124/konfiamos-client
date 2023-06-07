@@ -9,6 +9,7 @@ const CustomerController = new Customer();
 
 export function CustomerView() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [customer, setCustomer] = useState(null);
   const { accessToken } = useAuth();
 
@@ -32,17 +33,29 @@ export function CustomerView() {
     );
   }
 
-  const firstLoan =
-    customer.loanRequests && customer.loanRequests.length > 0
-      ? customer.loanRequests[0]
-      : null;
-  const otherLoans =
-    customer.loanRequests && customer.loanRequests.length > 1
-      ? customer.loanRequests.slice(1)
-      : [];
-
   return (
     <>
+      <div>
+        <div className="w-full mb-6 pt-3">
+          <div className="flex flex-row items-center justify-between mb-4">
+            <div className="flex flex-col">
+              <div className="text-base font-bold text-gray-500 uppercase">
+                <span className="text-gray-600">Vista General</span>
+                <div className="text-xl font-bold">
+                  <span className="text-gray-600">clientes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            className="text-white bg-[#1678C2] font-bold py-2 px-4 rounded-xl"
+            onClick={() => navigate(`/admin/customers`)}
+          >
+            <i className="fas fa-arrow-left text-white mr-2 text-lg"></i>
+            Regresar
+          </button>
+        </div>
+      </div>
       <div className="flex flex-col w-full mb-2 lg:flex-row lg:space-x-2 space-y-4 lg:space-y-0 lg:mb-4">
         <div className="w-full lg:w-1/3 lg:h-1/3">
           <div className="font-noto w-full p-4 rounded-lg bg-cyan-800 border-white">
@@ -126,97 +139,72 @@ export function CustomerView() {
             </div>
           </div>
         </div>
-
-        <div className="w-full lg:w-2/3 lg:h-auto">
-          {firstLoan && (
-            <div className="w-full p-3 rounded-lg bg-cyan-800">
-              <div className="flex flex-row items-center justify-between mb-6">
-                <div className="flex flex-col">
-                  <div className="text-lg font-bold text-white">Préstamo 1</div>
-                  <div className="text-base font-bold text-white">
-                    <span>Detalles del primer préstamo</span>
-                  </div>
-                </div>
-                <div className="relative inline-block text-left z-10"></div>
-              </div>
-              <div className="p-0 flex flex-col w-full">
-                <div className="p-4 rounded-lg bg-cyan-800 border-white">
-                  <p className="font-bold">Código: {firstLoan.code}</p>
-                  <p>Monto solicitado: {firstLoan.amountRequested}</p>
-                  <p>Monto a pagar: {firstLoan.totalAmount}</p>
-                  <p>Estatus: {firstLoan.status}</p>
-                  <p>
-                    Fecha de inicio:{" "}
-                    {format(
-                      new Date(firstLoan.startDate || "No hay datos"),
-                      "dd/MM/yyyy hh:mm:ss a"
-                    )}
-                  </p>
-                  <p>
-                    Fecha de Fin:{" "}
-                    {format(
-                      new Date(firstLoan.endDate || "No hay datos"),
-                      "dd/MM/yyyy hh:mm:ss a"
-                    )}
-                  </p>
-                  <p>Período: {firstLoan.period}</p>
-                  <p>Monto de interés: {firstLoan.interestAmount}</p>
-                  <p>Tasa de interés: {firstLoan.interestRate}</p>
-                  <p>Período pagado: {firstLoan.periodPaid}</p>
-                  <p>Total pagado: {firstLoan.totalPaid}</p>
-                </div>
+      </div>
+      <div className="w-full mb-2 lg:space-x-2 space-y-2 lg:space-y-0 lg:mb-4">
+        <div className="font-noto w-full p-4 rounded-lg  bg-cyan-800 border-white">
+          <div className="flex flex-row items-center justify-between mb-6">
+            <div className="flex flex-col">
+              <div className="text-lg font-bold text-white">Cliente</div>
+              <div className="text-base font-bold text-white">
+                <span>Información Préstamos</span>
               </div>
             </div>
-          )}
-
-          {otherLoans.length > 0 && (
-            <div className="w-full p-3 rounded-lg bg-cyan-800">
-              <div className="flex flex-row items-center justify-between mb-6">
-                <div className="flex flex-col">
-                  <div className="text-lg font-bold text-white">
-                    Otros Préstamos
-                  </div>
-                  <div className="text-base font-bold text-white">
-                    <span>Detalles de los demás préstamos</span>
-                  </div>
-                </div>
-                <div className="relative inline-block text-left z-10"></div>
-              </div>
-              <div className="p-0 flex flex-col w-full">
-                <ul className="list-disc pl-4">
-                  {otherLoans.map((loan) => (
-                    <li key={loan._id} className="mb-4">
-                      <div className="p-4 rounded-lg bg-cyan-800 border-white">
-                        <p className="font-bold">Código: {loan.code}</p>
-                        <p>Monto solicitado: {loan.amountRequested}</p>
-                        <p>Monto a pagar: {loan.totalAmount}</p>
-                        <p>Estatus: {loan.status}</p>
-                        <p>
-                          Fecha de inicio:{" "}
-                          {format(
-                            new Date(loan.startDate || "No hay datos"),
-                            "dd/MM/yyyy hh:mm:ss a"
-                          )}
-                        </p>
-                        <p>
-                          Fecha de Fin:{" "}
-                          {format(
-                            new Date(loan.endDate || "No hay datos"),
-                            "dd/MM/yyyy hh:mm:ss a"
-                          )}
-                        </p>
-                        <p>Período: {loan.period}</p>
-                        <p>Monto de interés: {loan.interestAmount}</p>
-                        <p>Tasa de interés: {loan.interestRate}</p>
-                        <p>Período pagado: {loan.periodPaid}</p>
-                        <p>Total pagado: {loan.totalPaid}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
+            <div className="relative inline-block text-left z-10"></div>
+          </div>
+          <div className="p-0 w-full">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b bg-cyan-800 border-white">
+                  <th className="p-3 font-bold text-white">Código</th>
+                  <th className="p-3 font-bold text-white">Monto solicitado</th>
+                  <th className="p-3 font-bold text-white">Monto a pagar</th>
+                  <th className="p-3 font-bold text-white">Estatus</th>
+                  <th className="p-3 font-bold text-white">Fecha de inicio</th>
+                  <th className="p-3 font-bold text-white">Fecha de Fin</th>
+                  <th className="p-3 font-bold text-white">Período</th>
+                  <th className="p-3 font-bold text-white">Monto de interés</th>
+                  <th className="p-3 font-bold text-white">Tasa de interés</th>
+                  <th className="p-3 font-bold text-white">Período pagado</th>
+                  <th className="p-3 font-bold text-white">Total pagado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {customer.loanRequests && customer.loanRequests.length > 0 ? (
+                  customer.loanRequests.map((loan) => (
+                    <tr key={loan._id} className="border-b border-slate-50">
+                      <td className="p-3 text-white">{loan.code}</td>
+                      <td className="p-3 text-white">{loan.amountRequested}</td>
+                      <td className="p-3 text-white">{loan.totalAmount}</td>
+                      <td className="p-3 text-white">{loan.status}</td>
+                      <td className="p-3 text-white">
+                        {format(
+                          new Date(loan.startDate || "No hay datos"),
+                          "dd/MM/yyyy "
+                        )}
+                      </td>
+                      <td className="p-3 text-white">
+                        {format(
+                          new Date(loan.endDate || "No hay datos"),
+                          "dd/MM/yyyy "
+                        )}
+                      </td>
+                      <td className="p-3 text-white">{loan.period}</td>
+                      <td className="p-3 text-white">{loan.interestAmount}</td>
+                      <td className="p-3 text-white">{loan.interestRate}</td>
+                      <td className="p-3 text-white">{loan.periodPaid}</td>
+                      <td className="p-3 text-white">{loan.totalPaid}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td className="p-3" colSpan="11">
+                      No hay préstamos
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

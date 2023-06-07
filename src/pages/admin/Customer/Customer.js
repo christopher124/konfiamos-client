@@ -17,7 +17,11 @@ export function Customer() {
       menuItem: "Cliente con prestamo",
       render: () => (
         <Tab.Pane attached={false}>
-          <ListCustomers customerStatus={true} reload={reload} />
+          <ListCustomers
+            customerStatus={true}
+            reload={reload}
+            onReload={onReload}
+          />
         </Tab.Pane>
       ),
     },
@@ -25,7 +29,11 @@ export function Customer() {
       menuItem: "Clientes sin prestamo",
       render: () => (
         <Tab.Pane attached={false}>
-          <ListCustomers customerStatus={false} reload={reload} />
+          <ListCustomers
+            customerStatus={false}
+            reload={reload}
+            onReload={onReload}
+          />
         </Tab.Pane>
       ),
     },
