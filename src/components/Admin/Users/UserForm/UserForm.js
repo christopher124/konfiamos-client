@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { image } from "../../../../assets";
 import { initialValues, validationSchema } from "./UserForm.form";
 import "./UserForm.scss";
+import { ENV } from "../../../../utils";
 import { Role, User } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { toast } from "react-toastify";
@@ -17,13 +18,18 @@ export function UserForm(props) {
   const { close, onReload, user } = props;
   const { accessToken } = useAuth();
   const formik = useFormik({
-    initialValues: initialValues(),
-    validationSchema: validationSchema(),
+    initialValues: initialValues(user),
+    validationSchema: validationSchema(user),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        await UserController.createUser(accessToken, formValue);
-        toast.success("Usuario creado correctamente.");
+        if (!user) {
+          await UserController.createUser(accessToken, formValue);
+          toast.success("Usuario creado correctamente.");
+        } else {
+          await UserController.updateUser(accessToken, user._id, formValue);
+          toast.success("Usuario actilizado correctamente.");
+        }
         onReload();
         close();
       } catch (error) {
@@ -52,6 +58,8 @@ export function UserForm(props) {
   const getAvatar = () => {
     if (formik.values.fileAvatar) {
       return formik.values.avatar;
+    } else if (formik.values.avatar) {
+      return `${ENV.BASE_PATH}/${formik.values.avatar}`;
     }
     return image.noAvatar;
   };
