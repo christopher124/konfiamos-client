@@ -25,16 +25,7 @@ export function AdminLayout(props) {
             {isLeftVisible ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}
           </button>
 
-          <Dropdown icon item text="Opciones">
-            <Dropdown.Menu>
-              <Dropdown.Item>English</Dropdown.Item>
-              <Dropdown.Item>
-                <IconA name="user" />
-                Mi cuenta
-              </Dropdown.Item>
-              <Logout />
-            </Dropdown.Menu>
-          </Dropdown>
+          <Logout />
         </div>
         <div className="admin-layout__right-content">{children}</div>
       </div>
