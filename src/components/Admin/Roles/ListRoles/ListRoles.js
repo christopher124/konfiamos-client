@@ -4,18 +4,20 @@ import { size, map } from "lodash";
 import { Role } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { RoleItem } from "../RoleItem";
-
+import { EmptyList } from "../../../Shared";
 const RoleController = new Role();
 
 export function ListRoles(props) {
   const { reload, onReload } = props;
   const [roles, setRoles] = useState(null);
-  const { accessToken } = useAuth();
+  const { accessToken, refreshToken, reLogin } = useAuth();
 
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const roles = await RoleController.getRoles(accessToken);
+        let validAccessToken = accessToken;
+
+        const roles = await RoleController.getRoles(validAccessToken);
         setRoles(roles);
       } catch (error) {}
     };
@@ -24,7 +26,9 @@ export function ListRoles(props) {
   }, [reload]);
 
   if (!roles) return <Loader active inline="centered" />;
-  if (size(roles) === 0) return "No hay ningún rol";
+  if (size(roles) === 0) {
+    return <EmptyList title="No hay ningún rol registrado." />;
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-2xl sm:rounded-lg">

@@ -4,6 +4,7 @@ import { size, map } from "lodash";
 import { Customer } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { CustomerItem } from "../CustomerItem";
+import { EmptyList } from "../../../Shared";
 
 const CustomerController = new Customer();
 
@@ -28,7 +29,17 @@ export function ListCustomers(props) {
   }, [customerStatus, reload]);
 
   if (!customers) return <Loader active inline="centered" />;
-  if (size(customers) === 0) return "No hay ningún usuario";
+  if (size(customers) === 0) {
+    return (
+      <EmptyList
+        title={
+          customerStatus == true
+            ? "No hay clientes con prestamo."
+            : "No hay clientes sin prestamo, registra un cliente."
+        }
+      />
+    );
+  }
 
   return (
     <div className="overflow-x-auto">
