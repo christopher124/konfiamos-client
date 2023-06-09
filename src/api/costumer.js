@@ -94,10 +94,53 @@ export class Customer {
       throw error;
     }
   }
-  async getCustomer(accessToken, id) {
+
+  async getCustomer(accessToken, idCustomer) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.CUSTOMER}/${id}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.CUSTOMER}/${idCustomer}`;
       const params = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteCustomer(accessToken, idCustomer) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.CUSTOMER}/${idCustomer}`;
+      const params = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async restoreCustomer(accessToken, idCustomer) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.CUSTOMER}/${idCustomer}/restore`;
+      const params = {
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
