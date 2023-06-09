@@ -64,4 +64,46 @@ export class Role {
       throw error;
     }
   }
+
+  async deleteRole(accessToken, idRole) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}/${idRole}`;
+      const params = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async restoreRole(accessToken, idRole) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}/${idRole}/restore`;
+      const params = {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
