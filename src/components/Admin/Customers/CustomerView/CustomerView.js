@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { Customer } from "../../../../api/costumer";
 import { useAuth } from "../../../../hooks";
+import { RiWallet3Line } from "react-icons/ri";
+import { Loader } from "semantic-ui-react";
 
 const CustomerController = new Customer();
 
@@ -27,9 +29,21 @@ export function CustomerView() {
     })();
   }, [id]);
 
+  if (!customer && customer !== null) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <RiWallet3Line size={48} color="#fff" className="mb-4" />
+        <span className="text-white">El cliente no existe.</span>
+      </div>
+    );
+  }
+
   if (!customer) {
     return (
-      <div className="text-center">Cargando información del cliente...</div>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="text-center">Cargando información del cliente...</div>
+        <Loader active inline="centered" />
+      </div>
     );
   }
 
@@ -57,8 +71,8 @@ export function CustomerView() {
         </div>
       </div>
       <div className="flex flex-col w-full mb-2 lg:flex-row lg:space-x-2 space-y-4 lg:space-y-0 lg:mb-4">
-        <div className="w-full lg:w-1/3 lg:h-1/3">
-          <div className="font-noto w-full p-4 rounded-lg bg-cyan-800 border-white">
+        <div className=" w-full p-4 rounded-lg  bg-cyan-800 border-white">
+          <div className=" w-full p-4 rounded-lg bg-cyan-800 border-white">
             <div className="w-full flex flex-row items-center justify-between mb-6">
               <div className="flex flex-col">
                 <div className="text-lg font-light text-white">Cliente</div>
@@ -69,7 +83,7 @@ export function CustomerView() {
             </div>
 
             <div className="p-5 text-center flex flex-col w-full">
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Nombre completo:{" "}
                 <span className="text-bold">
                   {customer.firstname && customer.lastname
@@ -77,20 +91,20 @@ export function CustomerView() {
                     : "No hay datos"}
                 </span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Género:{" "}
                 <span className="text-bold">
                   {customer.gender || "No hay datos"}
                 </span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Teléfono:{" "}
                 <span className="text-bold">
                   {customer.phone || "No hay datos"}
                 </span>
               </p>
 
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Estatus:{" "}
                 <span className="text-bold">
                   {customer.status
@@ -98,27 +112,27 @@ export function CustomerView() {
                     : "El cliente no tiene préstamo" || "No hay datos"}{" "}
                 </span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Domicilio:{" "}
                 <span className="text-bold">
                   {`${customer.street} ${customer.number_int_address} ${customer.number_ext_address}`}
                 </span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Colonia y municipio:{" "}
                 <span className="text-bold">
                   {`${customer.neighborhood}, ${customer.municipality}`}
                 </span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Codigo postal:{" "}
                 <span className="text-bold">{`${customer.zip}`}</span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Estado y ciudad:{" "}
                 <span className="text-bold">{`${customer.state}, ${customer.city}`}</span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Fecha de creación:{" "}
                 <span className="text-bold">
                   {format(
@@ -127,7 +141,7 @@ export function CustomerView() {
                   )}
                 </span>
               </p>
-              <p className="py-[0.15rem] text-white font-noto">
+              <p className="py-[0.15rem] text-white ">
                 Última actualización:{" "}
                 <span className="text-bold">
                   {format(
@@ -141,7 +155,7 @@ export function CustomerView() {
         </div>
       </div>
       <div className="w-full mb-2 lg:space-x-2 space-y-2 lg:space-y-0 lg:mb-4">
-        <div className="font-noto w-full p-4 rounded-lg  bg-cyan-800 border-white">
+        <div className=" w-full p-4 rounded-lg  bg-cyan-800 border-white">
           <div className="flex flex-row items-center justify-between mb-6">
             <div className="flex flex-col">
               <div className="text-lg font-bold text-white">Cliente</div>
@@ -198,7 +212,17 @@ export function CustomerView() {
                 ) : (
                   <tr>
                     <td className="p-3" colSpan="11">
-                      No hay préstamos
+                      <div className="flex flex-col items-center justify-center py-8">
+                        <RiWallet3Line
+                          size={48}
+                          color="#fff"
+                          className="mb-4"
+                        />
+
+                        <span className="text-white">
+                          El cliente no tiene nungún prestamo.
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 )}
