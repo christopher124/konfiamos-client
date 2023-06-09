@@ -47,7 +47,7 @@ export function UserItem(props) {
       const action = user.active ? "desactivado" : "activado";
       toast.success(`Usuario ${action} correctamente`);
     } catch (error) {
-      console.error(error);
+      toast.error(error.msg);
     }
   };
 
@@ -91,12 +91,11 @@ export function UserItem(props) {
           toast.success("Usuario recuperado correctamente");
           onReload();
         } catch (error) {
-          console.error(error);
-          toast.error("Error al recuperar el usuario");
+          toast.error(error.msg);
         }
       }
     } catch (error) {
-      console.error(error);
+      toast.error(error.msg);
     }
   };
 

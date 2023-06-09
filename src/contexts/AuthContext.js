@@ -12,28 +12,38 @@ export function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     (async () => {
-      // Comprobar si el usuario esta logeado o no
-      const accessToken = authController.getAccessToken();
-      const refreshToken = authController.getRefreshToken();
+      try {
+        // Comprobar si el usuario está logeado o no
+        const accessToken = authController.getAccessToken();
+        const refreshToken = authController.getRefreshToken();
 
-      if (!accessToken || !refreshToken) {
-        logout();
-        setLoading(false);
-        return;
-      }
-      if (hasExpiredToken(accessToken)) {
-        // Ha caducado
-        if (hasExpiredToken(refreshToken)) {
+        if (!accessToken || !refreshToken) {
           logout();
-        } else {
-          await reLogin(refreshToken);
+          setLoading(false);
+          return;
         }
-      } else {
-        await login(accessToken);
+
+        if (hasExpiredToken(accessToken)) {
+          // Ha caducado
+          if (hasExpiredToken(refreshToken)) {
+            logout();
+            // Aquí puedes cerrar la aplicación o redirigir a la página de inicio de sesión
+            return;
+          } else {
+            await reLogin(refreshToken);
+          }
+        } else {
+          await login(accessToken);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
       }
-      setLoading(false);
     })();
   }, []);
 
@@ -42,6 +52,12 @@ export function AuthProvider(props) {
       const { accessToken } = await authController.refreshAccessToken(
         refreshToken
       );
+
+      if (!accessToken) {
+        logout(); // Cerrar sesión si no se pudo obtener un nuevo token válido
+        return;
+      }
+
       authController.setAccessToken(accessToken);
       await login(accessToken);
     } catch (error) {
@@ -65,6 +81,7 @@ export function AuthProvider(props) {
       console.error(error);
     }
   };
+
   const data = {
     accessToken: token,
     user,
