@@ -1,11 +1,11 @@
 import { ENV } from "../utils";
 
-export class Role {
+export class LoanRequest {
   baseApi = ENV.BASE_API;
 
-  async getRoles(accessToken, deleted = undefined) {
+  async getLoanRequests(accessToken) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLES}?delete=${deleted}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOANREQUESTS}`;
       const params = {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -22,8 +22,8 @@ export class Role {
     }
   }
 
-  async createRole(accessToken, data) {
-    const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}`;
+  async createLoanRequest(accessToken, data) {
+    const url = `${this.baseApi}/${ENV.API_ROUTES.LOANREQUEST}`;
     const params = {
       method: "POST",
       headers: {
@@ -43,16 +43,16 @@ export class Role {
     throw error;
   }
 
-  async updateRole(accessToken, idrole, roleData) {
+  async updateLoanRequest(accessToken, idLoanRequest, loanRequestData) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}/${idrole}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOANREQUEST}/${idLoanRequest}`;
       const params = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(roleData),
+        body: JSON.stringify(loanRequestData),
       };
       const response = await fetch(url, params);
       const result = await response.json();
@@ -65,9 +65,9 @@ export class Role {
     }
   }
 
-  async deleteRole(accessToken, idRole) {
+  async deleteLoanRequest(accessToken, idLoanRequest) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}/${idRole}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOANREQUEST}/${idLoanRequest}`;
       const params = {
         method: "DELETE",
         headers: {
@@ -86,11 +86,54 @@ export class Role {
     }
   }
 
-  async restoreRole(accessToken, idRole) {
+  async restoreLoanRequest(accessToken, idLoanRequest) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.ROLE}/${idRole}/restore`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOANREQUEST}/${idLoanRequest}/restore`;
       const params = {
         method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updatePaymentStatus(accessToken, idPayment, paymentData) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOANPAYMENT}/${idPayment}`;
+      const params = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json", // Agregar encabezado de tipo de contenido
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(paymentData), // Agregar el campo 'paid' en el cuerpo de la solicitud
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getLoanPayments(accessToken, idLoanRequest) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOANPAYMENTS}/${idLoanRequest}`;
+      const params = {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
