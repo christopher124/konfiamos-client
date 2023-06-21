@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { Customer } from "../../../../api/costumer";
 import { useAuth } from "../../../../hooks";
@@ -191,16 +191,20 @@ export function CustomerView() {
                       <td className="p-3 text-white">{loan.totalAmount}</td>
                       <td className="p-3 text-white">{loan.status}</td>
                       <td className="p-3 text-white">
-                        {format(
-                          new Date(loan.startDate || "No hay datos"),
-                          "dd/MM/yyyy "
-                        )}
+                        {loan.startDate
+                          ? format(
+                              addDays(new Date(loan.startDate), 1),
+                              "dd/MM/yyyy "
+                            )
+                          : "No hay datos"}
                       </td>
                       <td className="p-3 text-white">
-                        {format(
-                          new Date(loan.endDate || "No hay datos"),
-                          "dd/MM/yyyy "
-                        )}
+                        {loan.endDate
+                          ? format(
+                              addDays(new Date(loan.endDate), 1),
+                              "dd/MM/yyyy "
+                            )
+                          : "No hay datos"}
                       </td>
                       <td className="p-3 text-white">{loan.period}</td>
                       <td className="p-3 text-white">{loan.interestAmount}</td>

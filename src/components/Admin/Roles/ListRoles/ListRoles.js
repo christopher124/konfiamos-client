@@ -42,7 +42,7 @@ export function ListRoles(props) {
           </tr>
         </thead>
         <tbody>
-          {roles?.map((role) => (
+          {map(roles, (role) => (
             <RoleItem key={role._id} role={role} onReload={onReload} />
           ))}
         </tbody>

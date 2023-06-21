@@ -14,6 +14,10 @@ export const ENV = {
     USERS: "users",
     CUSTOMER: "customer",
     CUSTOMERS: "customers",
+    LOANREQUEST: "loanrequest",
+    LOANREQUESTS: "loanrequests",
+    LOANPAYMENT: "loanpayment",
+    LOANPAYMENTS: "loanpayments",
   },
   JWT: {
     ACCESS: "access",

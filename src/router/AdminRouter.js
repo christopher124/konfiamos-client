@@ -8,9 +8,11 @@ import {
   Menu,
   LoanRequest,
   Role,
+  LoanPayment,
 } from "../pages/admin";
 import { CustomerView } from "../components/Admin/Customers";
 import { useAuth } from "../hooks";
+import { LoanDetailsView } from "../components/Admin/LoanPayments";
 // import { UserForm } from "../components/Users/UserForm";
 
 export function AdminRouter() {
@@ -57,10 +59,6 @@ export function AdminRouter() {
                 path="/admin/users"
                 element={loadLayout(AdminLayout, Users)}
               />
-              {/* <Route
-                path="/admin/nuevo/user"
-                element={loadLayout(AdminLayout, UserForm)}
-              /> */}
               <Route
                 path="/admin/customers"
                 element={loadLayout(AdminLayout, Customer)}
@@ -70,8 +68,16 @@ export function AdminRouter() {
                 element={loadLayout(AdminLayout, CustomerView)}
               />
               <Route
-                path="/admin/loanrequest"
+                path="/admin/loanrequests"
                 element={loadLayout(AdminLayout, LoanRequest)}
+              />
+              <Route
+                path="/admin/loanrequest/:id"
+                element={loadLayout(AdminLayout, LoanDetailsView)}
+              />
+              <Route
+                path="/admin/loanpayments/:id"
+                element={loadLayout(AdminLayout, LoanPayment)}
               />
               <Route
                 path="/admin/roles"

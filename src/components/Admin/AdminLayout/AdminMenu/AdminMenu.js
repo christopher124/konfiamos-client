@@ -14,7 +14,6 @@ export function AdminMenu() {
     return false;
   };
 
-  console.log(pathname);
   return (
     <Menu fluid vertical icon text className="admin-menu">
       {isAdmin && (
@@ -53,8 +52,8 @@ export function AdminMenu() {
           </Menu.Item>
           <Menu.Item
             as={Link}
-            to="/admin/loanrequest"
-            active={isCurrentPath("/admin/loanrequest")}
+            to="/admin/loanrequests"
+            active={isCurrentPath("/admin/loanrequests")}
           >
             <Icon name="pencil alternate" />
             Prestamos

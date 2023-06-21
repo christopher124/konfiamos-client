@@ -6,3 +6,4 @@ export * from "./Menu";
 export * from "./LoanRequest";
 export * from "./Role";
 export * from "./Customer";
+export * from "./LoanPayment";
