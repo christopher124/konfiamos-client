@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addDays, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { Customer } from "../../../../api/costumer";
+import { Customer } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { RiWallet3Line } from "react-icons/ri";
 import { Loader } from "semantic-ui-react";
@@ -14,8 +14,6 @@ export function CustomerView() {
   const navigate = useNavigate();
   const [customer, setCustomer] = useState(null);
   const { accessToken } = useAuth();
-
-  console.log(customer);
 
   useEffect(() => {
     (async () => {
