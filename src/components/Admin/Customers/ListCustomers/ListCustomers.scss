@@ -1,0 +1,18 @@
+.pageSize-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alineación a la derecha */
+
+    margin-bottom: 1rem;
+  
+    label {
+      margin-right: 0.5rem;
+    }
+  
+    select {
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+  }
+ 
