@@ -1,4 +1,4 @@
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { WebRouter, AdminRouter } from "./router";
 import { AuthProvider } from "./contexts";
 import { ToastContainer } from "react-toastify";
@@ -19,10 +19,10 @@ export default function App() {
         pauseOnHover
         theme="light"
       />
-      <HashRouter>
+      <BrowserRouter>
         <AdminRouter />
         <WebRouter />
-      </HashRouter>
+      </BrowserRouter>
     </AuthProvider>
   );
 }
