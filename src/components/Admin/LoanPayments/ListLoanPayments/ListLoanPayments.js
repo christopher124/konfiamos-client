@@ -14,7 +14,7 @@ export function ListLoanPayments(props) {
   const { reload, onReload } = props;
   const [loanPayments, setLoanPayments] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10); // Número de clientes por página
+  const [pageSize, setPageSize] = useState(5); // Número de pagos por página
   const { accessToken } = useAuth();
   const { id } = useParams();
   useEffect(() => {

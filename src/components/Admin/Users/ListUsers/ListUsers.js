@@ -14,7 +14,7 @@ export function ListUsers(props) {
   const { usersActive, reload, onReload } = props;
   const [users, setUsers] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10); // Número de usuarios por página
+  const [pageSize, setPageSize] = useState(5); // Número de usuarios por página
   const { user: currentUser, accessToken } = useAuth();
 
   useEffect(() => {

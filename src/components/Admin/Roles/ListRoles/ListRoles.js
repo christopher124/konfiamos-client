@@ -14,7 +14,7 @@ export function ListRoles(props) {
   const { reload, onReload } = props;
   const [roles, setRoles] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10); // Número de roles por página
+  const [pageSize, setPageSize] = useState(5); // Número de roles por página
   const { accessToken } = useAuth();
 
   useEffect(() => {

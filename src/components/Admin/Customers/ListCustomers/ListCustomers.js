@@ -14,7 +14,7 @@ export function ListCustomers(props) {
   const { customerStatus, reload, onReload } = props;
   const [customers, setCustomers] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10); // Número de clientes por página
+  const [pageSize, setPageSize] = useState(5); // Número de clientes por página
   const { accessToken } = useAuth();
 
   useEffect(() => {

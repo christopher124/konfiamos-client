@@ -14,7 +14,7 @@ export function ListLoanRequests(props) {
   const { reload, onReload } = props;
   const [loanRequests, setLoanRequests] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10); // Número de prestamos por página
+  const [pageSize, setPageSize] = useState(5); // Número de prestamos por página
   const { accessToken } = useAuth();
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export function ListLoanRequests(props) {
       <div className="pageSize-container">
         <label htmlFor="pageSize">Mostrar:</label>
         <select id="pageSize" value={pageSize} onChange={handlePageSizeChange}>
-          <option value={2}>2</option>
+          <option value={5}>5</option>
           <option value={10}>10</option>
           <option value={20}>20</option>
         </select>
