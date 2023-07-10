@@ -42,6 +42,7 @@ export function RolForm(props) {
           onChange={formik.handleChange}
           value={formik.values.name}
           error={formik.errors.name}
+          disabled={formik.values.name === "Admin"} // Deshabilitar si el valor es "admin"
         />
         <Form.Input
           name="displayName"

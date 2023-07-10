@@ -12,8 +12,7 @@ import {
 } from "../pages/admin";
 import { CustomerView } from "../components/Admin/Customers";
 import { useAuth } from "../hooks";
-import { LoanDetailsView } from "../components/Admin/LoanPayments";
-// import { UserForm } from "../components/Users/UserForm";
+import { LoanDetailsView } from "../components/Admin/LoanRequest";
 
 export function AdminRouter() {
   const { user } = useAuth();
@@ -64,6 +63,10 @@ export function AdminRouter() {
                 element={loadLayout(AdminLayout, Customer)}
               />
               <Route
+                path="/admin/roles"
+                element={loadLayout(AdminLayout, Role)}
+              />
+              <Route
                 path="/admin/customer/:id"
                 element={loadLayout(AdminLayout, CustomerView)}
               />
@@ -78,10 +81,6 @@ export function AdminRouter() {
               <Route
                 path="/admin/loanpayments/:id"
                 element={loadLayout(AdminLayout, LoanPayment)}
-              />
-              <Route
-                path="/admin/roles"
-                element={loadLayout(AdminLayout, Role)}
               />
               {/* Agregar rutas adicionales para el rol "Admin" */}
             </>

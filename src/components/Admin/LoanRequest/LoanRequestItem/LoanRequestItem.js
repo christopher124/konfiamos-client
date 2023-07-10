@@ -143,12 +143,12 @@ export function LoanRequestItem(props) {
               <Icon name="trash" />
             </Button>
 
-            <Button
+            {/* <Button
               icon
               onClick={() => navigate(`/admin/loanrequest/${loanRequest._id}`)}
             >
               <Icon name="eye" />
-            </Button>
+            </Button> */}
 
             <Button
               icon
@@ -161,7 +161,7 @@ export function LoanRequestItem(props) {
               fileName="propuesta.pdf"
             >
               <Button icon>
-                <Icon name="download" />
+                <Icon name="file pdf" />
               </Button>
             </PDFDownloadLink>
           </div>

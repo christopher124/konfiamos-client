@@ -15,13 +15,13 @@ export function LoanPaymentsItem(props) {
   const [partialPaymentAmount, setPartialPaymentAmount] = useState(
     loanPayment.partialPaymentAmount || 0
   );
-
+  console.log(loanPayment);
   const openDesactivateActivateConfirm = () => {
     const action = loanPayment.paid ? "Revertir" : "Confirmar";
     Swal.fire({
       title: `${action} el pago del préstamo`,
       text: `¿Estás seguro de que deseas ${action.toLowerCase()} el pago del préstamo ${
-        loanPayment.end
+        loanPayment.loanRequest.code
       }?`,
       icon: "warning",
       showCancelButton: true,
@@ -123,6 +123,9 @@ export function LoanPaymentsItem(props) {
               : "No hay datos"}
           </td>
         </th>
+        <td className="border border-slate-50 text-white font-medium px-6 py-4 text-center">
+          {loanPayment.loanRequest.code}
+        </td>
         <td className="border border-slate-50 px-6 py-4 font-medium text-white whitespace-nowrap">
           {loanPayment.dueDate
             ? format(addDays(new Date(loanPayment.dueDate), 1), "dd/MM/yyyy ")

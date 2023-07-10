@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tab, Button } from "semantic-ui-react";
+import { Tab } from "semantic-ui-react";
 import { BasicModal } from "../../../components/Shared";
 import { UserForm, ListUsers } from "../../../components/Admin/Users";
 import "./Users.scss";
