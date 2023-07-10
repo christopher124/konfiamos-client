@@ -34,7 +34,7 @@ export function validationSchema() {
     phone: Yup.string().required(true),
     cellnumber: Yup.string().required(true),
     street: Yup.string().required(true),
-    number_int_address: Yup.string().required(false),
+    number_int_address: Yup.string(),
     number_ext_address: Yup.string().required(true),
     neighborhood: Yup.string().required(true),
     zip: Yup.string().required(true),
