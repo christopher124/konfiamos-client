@@ -39,6 +39,26 @@ export class Customer {
     }
   }
 
+  async getCustomersCount(accessToken) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.CUSTOMERS}/count`;
+      const params = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async updateCustomer(accessToken, idCustomer, costomerData) {
     try {
       const data = costomerData;
