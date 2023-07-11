@@ -18,6 +18,7 @@ export const ENV = {
     LOANREQUESTS: "loanrequests",
     LOANPAYMENT: "loanpayment",
     LOANPAYMENTS: "loanpayments",
+    TOTALINVESTMENT: "totalinvestment",
   },
   JWT: {
     ACCESS: "access",

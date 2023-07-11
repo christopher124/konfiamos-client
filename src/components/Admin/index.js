@@ -5,3 +5,4 @@ export * from "./Roles";
 export * from "./Users";
 export * from "./LoanRequest";
 export * from "./LoanPayments";
+export * from "./Dashboard";
